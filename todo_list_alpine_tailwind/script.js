@@ -87,21 +87,22 @@ function updateData() {
         updateTask() {
             this.isEditing = !this.isEditing;
         },
-        disableEditing(textbox, taskId) {
+        update(textbox, taskId) {
             this.isEditing = false;
-
             var todos = JSON.parse(localStorage.getItem("todos"));
             var tasks = todos.filter(function (data) {
                 return data.id == taskId;
             });
             var oldTask = tasks[0].task;
-            textbox.addEventListener("blur", function (event) {
+           
                 if (textbox.value.trim() === "") {
                     textbox.parentNode.previousElementSibling.innerText = oldTask;
                     textbox.value = oldTask;
+                    console.log(oldTask);
                 }
-            });
-            localStorage.setItem("todos", JSON.stringify(this.todos));
+                else{
+                    localStorage.setItem("todos", JSON.stringify(this.todos));
+                }
         },
     };
 }

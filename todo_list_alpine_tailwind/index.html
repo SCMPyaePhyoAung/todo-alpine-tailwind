@@ -48,9 +48,9 @@
               <label class="task_name my-auto" x-text="todo.task" x-bind:class="{'completed': todo.completed}"
                 @click.prevent @dblclick="updateTask" x-show="!isEditing"></label>
               <div class="">
-                <input type="text" x-model="todo.task" x-show="isEditing" @click.away="updateTask"
-                @keydown.enter="disableEditing(event.target,todo.id)" @keydown.window.escape="disableEditing(event.target,todo.id)"
-                class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 appearance-none leading-normal w-128"
+                <input type="text" x-model="todo.task" x-show="isEditing"
+                x-on:change()="update(event.target,todo.id)"  
+                class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 appearance-none leading-normal w-auto"
                 >
               </div>
               <b class="delete ml-auto text-red-500" @click="todos = todos.filter(t => t.id !== todo.id), localStorage.setItem('todos', JSON.stringify(todos)), totals = todos.filter((todo) => todo.completed != true).length;">
